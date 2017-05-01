@@ -1,0 +1,48 @@
+workspace:
+  base: /go
+  path: src/github.com/purepennons/upload2gcs
+
+matrix:
+  GITHUB_REPO:
+    - purepennons/upload2gcs
+
+pipeline:
+  test:
+    image: golang:1.8
+    environment:
+      - CGO_ENABLED=0
+    commands:
+      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o drone-upload2gcs
+
+  publish:
+    image: plugins/docker
+    repo: ${GITHUB_REPO}
+    password: ${DOCKER_PASSWORD}
+    email: ${DOCKER_EMAIL}
+    username: ${DOCKER_USERNAME}
+    tags: [ "latest", "0.1", "0.1.0" ]
+    when:
+      branch: master
+      event: push
+
+# plugin:
+#   name: GCS
+#   desc: Upload a file to Google Cloud Storage
+#   type: publish
+#   image: ${GITHUB_REPO}
+#   labels:
+#     - publish
+#     - google cloud
+#     - gcp
+#     - gcs
+
+  # gcs:
+  #   image: wyattjoh/drone-gcs
+  #   debug: true
+  #   acl: public
+  #   credentials: ${GOOGLE_APPLICATION_CREDENTIALS_CONTENTS}
+  #   bucket: "qeek-testbed.appspot.com"
+  #   source: public/**/*
+  #   strip_prefix: public/
+  #   target: /target/location
+
