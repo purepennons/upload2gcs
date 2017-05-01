@@ -15,16 +15,16 @@ pipeline:
       - go get
       - go build -o drone-upload2gcs
 
-  publish:
-    image: plugins/docker
-    repo: purepennons/upload2gcs
-    password: ${DOCKER_PASSWORD}
-    email: ${DOCKER_EMAIL}
-    username: ${DOCKER_USERNAME}
-    tags: latest
-    when:
-      branch: master
-      event: push
+  # publish:
+  #   image: plugins/docker
+  #   repo: purepennons/upload2gcs
+  #   password: ${DOCKER_PASSWORD}
+  #   email: ${DOCKER_EMAIL}
+  #   username: ${DOCKER_USERNAME}
+  #   tags: latest
+  #   when:
+  #     branch: master
+  #     event: push
 
 
 # plugin:
@@ -38,13 +38,13 @@ pipeline:
 #     - gcp
 #     - gcs
 
-  # gcs:
-  #   image: wyattjoh/drone-gcs
-  #   debug: true
-  #   acl: public
-  #   credentials: ${GOOGLE_APPLICATION_CREDENTIALS_CONTENTS}
-  #   bucket: "qeek-testbed.appspot.com"
-  #   source: public/**/*
-  #   strip_prefix: public/
-  #   target: /target/location
+  gcs:
+    image: wyattjoh/drone-gcs
+    debug: true
+    acl: private
+    credentials: ${GOOGLE_APPLICATION_CREDENTIALS_CONTENTS}
+    bucket: "qeek-testbed.appspot.com"
+    source: ./drone-upload2gcs
+    strip_prefix: /private
+    target: /private
 
