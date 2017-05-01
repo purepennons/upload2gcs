@@ -13,7 +13,7 @@ pipeline:
       - CGO_ENABLED=0
     commands:
       - go get
-      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o drone-upload2gcs
+      - go build -o drone-upload2gcs
 
   publish:
     image: plugins/docker
@@ -26,16 +26,16 @@ pipeline:
       branch: master
       event: push
 
-# plugin:
-#   name: GCS
-#   desc: Upload a file to Google Cloud Storage
-#   type: publish
-#   image: ${GITHUB_REPO}
-#   labels:
-#     - publish
-#     - google cloud
-#     - gcp
-#     - gcs
+plugin:
+  name: GCS
+  desc: Upload a file to Google Cloud Storage
+  type: publish
+  image: ${GITHUB_REPO}
+  labels:
+    - publish
+    - google cloud
+    - gcp
+    - gcs
 
   # gcs:
   #   image: wyattjoh/drone-gcs
