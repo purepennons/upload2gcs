@@ -26,6 +26,7 @@ pipeline:
       branch: master
       event: push
 
+
 # plugin:
 #   name: GCS
 #   desc: Upload a file to Google Cloud Storage
