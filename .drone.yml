@@ -26,16 +26,16 @@ pipeline:
       branch: master
       event: push
 
-plugin:
-  name: GCS
-  desc: Upload a file to Google Cloud Storage
-  type: publish
-  image: ${GITHUB_REPO}
-  labels:
-    - publish
-    - google cloud
-    - gcp
-    - gcs
+# plugin:
+#   name: GCS
+#   desc: Upload a file to Google Cloud Storage
+#   type: publish
+#   image: ${GITHUB_REPO}
+#   labels:
+#     - publish
+#     - google cloud
+#     - gcp
+#     - gcs
 
   # gcs:
   #   image: wyattjoh/drone-gcs
