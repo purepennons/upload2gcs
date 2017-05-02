@@ -47,4 +47,3 @@ pipeline:
     source: ./drone-upload2gcs
     strip_prefix: /private
     target: /private
-
