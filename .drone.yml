@@ -12,9 +12,9 @@ pipeline:
     environment:
       - CGO_ENABLED=0
     commands:
-      # - go get
-      # - go build -o drone-upload2gcs
-        - touch drone-upload2gcs
+      - go get
+      - go build -o drone-upload2gcs
+      # - touch drone-upload2gcs
 
   # publish:
   #   image: plugins/docker
@@ -48,3 +48,4 @@ pipeline:
     source: ./drone-upload2gcs
     strip_prefix: /private
     target: /private
+
