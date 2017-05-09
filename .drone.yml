@@ -47,7 +47,7 @@ pipeline:
     image: wyattjoh/drone-gcs
     acl: private
     credentials: ${GOOGLE_APPLICATION_CREDENTIALS_CONTENTS}
-    bucket: $BUCKET
+    bucket: ${BUCKET}
     source: ./drone-upload2gcs
     strip_prefix: /private
     target: /${GCS_FOLDER}
