@@ -5,6 +5,8 @@ workspace:
 matrix:
   GITHUB_REPO:
     - purepennons/upload2gcs
+  GCS_FOLDER:
+    - /folder
 
 pipeline:
   test:
@@ -41,11 +43,10 @@ pipeline:
 
   gcs:
     image: wyattjoh/drone-gcs
-    debug: true
     acl: private
     credentials: ${GOOGLE_APPLICATION_CREDENTIALS_CONTENTS}
     bucket: "qeek-testbed.appspot.com"
     source: ./drone-upload2gcs
     strip_prefix: /private
-    target: /private
+    target: $GCS_FOLDER
 
